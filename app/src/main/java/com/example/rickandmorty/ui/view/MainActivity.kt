@@ -1,4 +1,5 @@
 package com.example.rickandmorty.ui.view
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -11,45 +12,42 @@ import com.example.rickandmorty.databinding.ActivityMainBinding
 import com.example.rickandmorty.ui.adapter.CharactersAdapter
 import com.example.rickandmorty.ui.viewModel.MainViewModel
 import com.example.rickandmorty.util.Result
+import com.example.rickandmorty.util.ViewModelFactory
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
-    private lateinit var viewMod: MainViewModel
+    private val viewModel: MainViewModel by viewModels(factoryProducer = { ViewModelFactory() })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val charactersAdapter = CharactersAdapter(this, emptyList())
-        recyclerView.adapter = charactersAdapter
+        setUpRecyclerView()
+        // Obtener los datos en el ViewModel
+        viewModel.getCharacters()
+    }
 
+    fun setUpRecyclerView() { 
+        viewBinding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val charactersAdapter = CharactersAdapter(this, emptyList())
+        viewBinding.recyclerView.adapter = charactersAdapter
         // Observar el LiveData en el contexto de la Activity
         viewModel.charactersLiveData.observe(this) { result ->
             when (result) {
-                is Result.Success-> {
+                is Result.Success -> {
                     val characters = result.data
                     charactersAdapter.submitList(characters)
                 }
+
                 is Result.Error -> {
                     val exception = result.exception
                     // Manejar error
                     Toast.makeText(this, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
                 }
-
-                else -> {
-
-                }
             }
         }
-
-        // Obtener los datos en el ViewModel
-        viewModel.getCharacters()
     }
 }
 

@@ -1,6 +1,6 @@
 package com.example.rickandmorty.data.dto
 
-data class Info(
+data class InfoDTO(
     val count: Int,
     val next: String,
     val pages: Int,

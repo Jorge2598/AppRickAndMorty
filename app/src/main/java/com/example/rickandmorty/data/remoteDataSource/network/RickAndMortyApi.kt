@@ -1,5 +1,5 @@
 package com.example.rickandmorty.data.api.network
-import com.example.rickandmorty.data.dto.ResultDTO
+import com.example.rickandmorty.data.dto.CharacterResponseDTO
 import com.example.rickandmorty.data.remoteDataSource.network.RickAndMortyApiService
 import com.example.rickandmorty.util.Constants.BASE_URL
 import okhttp3.OkHttpClient
@@ -21,14 +21,11 @@ class RickAndMortyApi(
         .build()
 
     private val apiService = retrofit.create(RickAndMortyApiService::class.java)
-
-    suspend fun getAllCharacters(): Response<ResultDTO> {
+    suspend fun getAllCharacters(): Response<CharacterResponseDTO> {
         return apiService.getAllCharacters()
     }
 
     suspend fun getCharacterById(id: Int): Response<Character> {
         return apiService.getCharacterById(id)
     }
-
-
 }

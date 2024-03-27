@@ -1,10 +1,9 @@
 package com.example.rickandmorty.domain.model
 
 import com.example.rickandmorty.data.dto.CharacterDTO
-import com.example.rickandmorty.data.dto.ResultDTO
 
 
-data class Characters(
+data class Character(
     val created: String? = "",
     val episode: List<String>? = emptyList(),
     val gender: String? = "",
@@ -17,7 +16,7 @@ data class Characters(
     val url: String? = ""
 )
 
-fun  ResultDTO.toDomain() = Characters(
+fun CharacterDTO.toDomain() = Character(
     created = created,
     episode = episode,
     gender = gender,

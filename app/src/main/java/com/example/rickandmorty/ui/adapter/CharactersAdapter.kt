@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty.R
-import com.example.rickandmorty.domain.model.Characters
+import com.example.rickandmorty.domain.model.Character
 import com.squareup.picasso.Picasso
 
-class CharactersAdapter (private val context: Context, private var characters: List<Characters>) : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharactersAdapter (private val context: Context, private var characters: List<Character>) : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val inflater = LayoutInflater.from(context)
@@ -27,7 +27,7 @@ class CharactersAdapter (private val context: Context, private var characters: L
         return characters.size
     }
 
-    fun submitList(newCharacters: List<Characters>) {
+    fun submitList(newCharacters: List<Character>) {
         characters = newCharacters
         notifyDataSetChanged()
     }
@@ -36,7 +36,7 @@ class CharactersAdapter (private val context: Context, private var characters: L
         private val imageViewCharacter: ImageView = itemView.findViewById(R.id.imageViewImage)
         private val textViewName: TextView = itemView.findViewById(R.id.textViewName)
 
-        fun bind(character: Characters) {
+        fun bind(character: Character) {
             textViewName.text = character.name
             Picasso.get().load(character.image).into(imageViewCharacter)
         }
