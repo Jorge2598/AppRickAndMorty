@@ -1,3 +1,4 @@
+/*
 package com.example.rickandmorty.util
 
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import com.example.rickandmorty.data.CharacterRepositoryImp
 import com.example.rickandmorty.data.api.network.RickAndMortyApi
 import com.example.rickandmorty.domain.useCase.GetAllCharactersUseCase
 import com.example.rickandmorty.ui.viewModel.MainViewModel
+import com.example.rickandmorty.util.di.ApplicationModule
 
 class ViewModelFactory() : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
@@ -16,7 +18,7 @@ class ViewModelFactory() : ViewModelProvider.Factory {
     ): T {
         val viewModel: ViewModel = when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(
-                GetAllCharactersUseCase(CharacterRepositoryImp(RickAndMortyApi()))
+                ApplicationModule.provideGetAllCharactersUseCase()
             )
 
             else -> null
@@ -28,3 +30,4 @@ class ViewModelFactory() : ViewModelProvider.Factory {
         return viewModel as T
     }
 }
+*/

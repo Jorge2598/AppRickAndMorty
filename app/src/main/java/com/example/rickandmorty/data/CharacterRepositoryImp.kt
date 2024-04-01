@@ -4,12 +4,13 @@ import com.example.rickandmorty.data.api.network.RickAndMortyApi
 import com.example.rickandmorty.domain.model.Character
 import com.example.rickandmorty.domain.model.toDomain
 import com.example.rickandmorty.util.Result
+import javax.inject.Inject
 
-class CharacterRepositoryImp(private val api: RickAndMortyApi) : CharacterRepositoryInt {
+class CharacterRepositoryImp @Inject constructor(private val api: RickAndMortyApi) : CharacterRepositoryInt {
 
-    override suspend fun getAllCharacters(): Result<List<Character>> {
+    override suspend fun getAllCharacters(page:String): Result<List<Character>> {
         return try {
-            var response = api.getAllCharacters()
+            var response = api.getAllCharacters(page)
             if (response.isSuccessful) {
                 val characterDTO = response.body()?.results
                 val character = characterDTO?.map { it.toDomain() }
@@ -19,6 +20,6 @@ class CharacterRepositoryImp(private val api: RickAndMortyApi) : CharacterReposi
             }
         } catch (e: Exception) {
             Result.Error(e)
-        }
+         }
     }
 }

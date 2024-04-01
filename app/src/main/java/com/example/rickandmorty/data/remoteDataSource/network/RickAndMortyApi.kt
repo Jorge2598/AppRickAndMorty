@@ -1,28 +1,27 @@
 package com.example.rickandmorty.data.api.network
+
 import com.example.rickandmorty.data.dto.CharacterResponseDTO
 import com.example.rickandmorty.data.remoteDataSource.network.RickAndMortyApiService
 import com.example.rickandmorty.util.Constants.BASE_URL
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 
-class RickAndMortyApi(
-    private val baseUrl: String = BASE_URL,
-    private val okHttpClient: OkHttpClient = OkHttpClient(),
-    private val gsonConverterFactory: GsonConverterFactory = GsonConverterFactory.create()
+class RickAndMortyApi @Inject constructor(
+    private val baseUrl: String,
+    private val gsonConverterFactory: GsonConverterFactory,
+    private val retrofit: Retrofit
 ) {
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .addConverterFactory(gsonConverterFactory)
-        .client(okHttpClient)
-        .build()
-
     private val apiService = retrofit.create(RickAndMortyApiService::class.java)
-    suspend fun getAllCharacters(): Response<CharacterResponseDTO> {
-        return apiService.getAllCharacters()
+    suspend fun getAllCharacters(page: String): Response<CharacterResponseDTO> {
+        return apiService.getAllCharacters(page)
     }
 
     suspend fun getCharacterById(id: Int): Response<Character> {

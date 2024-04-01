@@ -1,4 +1,5 @@
 package com.example.rickandmorty.ui.adapter
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,8 @@ import com.example.rickandmorty.R
 import com.example.rickandmorty.domain.model.Character
 import com.squareup.picasso.Picasso
 
-class CharactersAdapter (private val context: Context, private var characters: List<Character>) : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharactersAdapter(private val context: Context, private var characters: List<Character>) :
+    RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val inflater = LayoutInflater.from(context)
@@ -28,9 +30,16 @@ class CharactersAdapter (private val context: Context, private var characters: L
     }
 
     fun submitList(newCharacters: List<Character>) {
-        characters = newCharacters
-        notifyDataSetChanged()
+        val startPosition = characters.size // Obtener la posición inicial de los nuevos elementos
+        if (characters.isEmpty()){
+            characters = newCharacters
+            notifyDataSetChanged()
+        }else{
+            characters += newCharacters // Añadir los nuevos personajes a la lista existente
+            notifyItemRangeInserted(startPosition, newCharacters.size)
+        }
     }
+
 
     inner class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageViewCharacter: ImageView = itemView.findViewById(R.id.imageViewImage)
@@ -42,4 +51,4 @@ class CharactersAdapter (private val context: Context, private var characters: L
         }
     }
 
-    }
+}
