@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#6AFFFFFF</color>
     <color name="morado">#8000FF</color>
+    <color name="green">#49e61d</color>
+    <color name="gris_oscuro">#2A2C2A</color>
+    <color name="negro_transparente">#00000000</color>
+    <color name="blanco_transparente">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="desconocido">#979494</color>
+
 
 </resources>

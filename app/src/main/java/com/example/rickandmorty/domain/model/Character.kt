@@ -1,8 +1,12 @@
 package com.example.rickandmorty.domain.model
 
+import android.os.Parcelable
 import com.example.rickandmorty.data.dto.CharacterDTO
+import com.example.rickandmorty.data.dto.LocationDTO
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
-
+@Parcelize
 data class Character(
     val created: String? = "",
     val episode: List<String>? = emptyList(),
@@ -13,8 +17,10 @@ data class Character(
     val species: String? = "",
     val status: String? = "",
     val type: String? = "",
-    val url: String? = ""
-)
+    val url: String? = "",
+    val location: String? = "",
+    val origin: String? = ""
+):Parcelable
 
 fun CharacterDTO.toDomain() = Character(
     created = created,
@@ -26,5 +32,7 @@ fun CharacterDTO.toDomain() = Character(
     species = species,
     status = status,
     type = type,
-    url = url
+    url = url,
+    location = location.name,
+    origin = origin.name
 )

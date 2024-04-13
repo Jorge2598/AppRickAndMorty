@@ -1,8 +1,12 @@
 package com.example.rickandmorty.util.di
 
+import android.app.Application
+import android.content.Context
 import com.example.rickandmorty.data.CharacterRepositoryImp
 import com.example.rickandmorty.data.CharacterRepositoryInt
 import com.example.rickandmorty.data.api.network.RickAndMortyApi
+import com.example.rickandmorty.data.localDataSource.local.RickAndMortyLocalDataBase
+import com.example.rickandmorty.data.localDataSource.local.RickAndMortyLocalDataBaseService
 import com.example.rickandmorty.domain.useCase.GetAllCharactersUseCase
 import com.example.rickandmorty.util.Constants.BASE_URL
 import dagger.Module
@@ -17,7 +21,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApplicationModule {
+class ApplicationModule() {
 
     @Provides
     @Singleton
@@ -46,8 +50,8 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideCharacterRepository(rickAndMortyApi: RickAndMortyApi): CharacterRepositoryInt {
-        return CharacterRepositoryImp(rickAndMortyApi)
+    fun provideCharacterRepository(rickAndMortyApi: RickAndMortyApi, rickAndMortyLocalDataBase: RickAndMortyLocalDataBaseService): CharacterRepositoryInt {
+        return CharacterRepositoryImp(rickAndMortyApi, rickAndMortyLocalDataBase)
     }
 
     @Provides
@@ -74,6 +78,12 @@ class ApplicationModule {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDatabase(context:Application): RickAndMortyLocalDataBaseService {
+        return RickAndMortyLocalDataBase(context)
     }
 
 }

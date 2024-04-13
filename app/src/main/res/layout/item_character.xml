@@ -1,23 +1,68 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
     android:orientation="vertical"
-    android:gravity="center">
+    android:layout_gravity="start"
+    android:background="@drawable/rounded_background"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    app:layout_goneMarginBottom="10dp"
+    android:clipToOutline="true">
+
 
     <ImageView
         android:id="@+id/imageViewImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="94dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:padding="8dp" />
+        android:layout_width="239dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/roboto_black"
+        android:padding="8dp"
+        android:paddingLeft="10dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/blanco_transparente"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewImage"
+        tools:text="Pepinillo rick" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="239dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_bold"
+        android:padding="8dp"
+        android:paddingLeft="10dp"
+        android:text="estado"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewImage"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

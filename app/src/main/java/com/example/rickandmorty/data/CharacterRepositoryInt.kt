@@ -7,4 +7,5 @@ import dagger.Component
 interface CharacterRepositoryInt {
         suspend fun getAllCharacters(page:String): Result<List<Character>>
 
+
 }
